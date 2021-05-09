@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.QuestionMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.Question">
+        <id column="id" property="id"/>
+        <result column="text" property="text"/>
+        <result column="content" property="content"/>
+        <result column="idSubject" property="idSubject"/>
+        <result column="createdDate" property="createdDate"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        [id],
+        [text],
+        [content],
+        [idSubject],
+        [createdDate],
+        [status]
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from [Question]
+        where [id] = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from [Question]
+        where [id] = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Question"
+            useGeneratedKeys="true">
+        insert into [Question] ([text], [content], [idSubject], [createdDate], [status])
+        values (#{text}, #{content}, #{idSubject}, #{createdDate}, #{status})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bac.quizonline.model.entity.Question" useGeneratedKeys="true">
+        insert into [Question]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="text != null and text != ''">
+                [text],
+            </if>
+            <if test="content != null and content != ''">
+                [content],
+            </if>
+            <if test="idSubject != null">
+                [idSubject],
+            </if>
+            <if test="createdDate != null">
+                [createdDate],
+            </if>
+            <if test="status != null">
+                [status],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="text != null and text != ''">
+                #{text},
+            </if>
+            <if test="content != null and content != ''">
+                #{content},
+            </if>
+            <if test="idSubject != null">
+                #{idSubject},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.Question">
+        update [Question]
+        <set>
+            <if test="text != null and text != ''">
+                [text] = #{text},
+            </if>
+            <if test="content != null and content != ''">
+                [content] = #{content},
+            </if>
+            <if test="idSubject != null">
+                [idSubject] = #{idSubject},
+            </if>
+            <if test="createdDate != null">
+                [createdDate] = #{createdDate},
+            </if>
+            <if test="status != null">
+                [status] = #{status},
+            </if>
+        </set>
+        where [id] = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.Question">
+        update [Question]
+        set [text]        = #{text},
+            [content]     = #{content},
+            [idSubject]   = #{idSubject},
+            [createdDate] = #{createdDate},
+            [status]      = #{status}
+        where [id] = #{id}
+    </update>
+    <update id="updateStatus" parameterType="com.bac.quizonline.model.entity.Question">
+        update [Question]
+        set [status] = #{status}
+        where [id] = #{id}
+    </update>
+    <resultMap id="QuestionWithSubjectDetail" type="Question">
+        <id property="id" column="id"/>
+        <result column="text" property="text"/>
+        <result column="content" property="content"/>
+        <result column="idSubject" property="idSubject"/>
+        <result column="createdDate" property="createdDate"/>
+        <result column="status" property="status"/>
+        <association property="subject" javaType="com.bac.quizonline.model.entity.Subject">
+            <id column="S_id" property="id"/>
+            <result column="sName" property="name"/>
+            <result column="description" property="description"/>
+        </association>
+        <collection property="options" ofType="com.bac.quizonline.model.entity.Option"
+                    javaType="List">
+            <id column="O_id" property="id"/>
+            <result column="O_content" property="content"/>
+            <result column="isRightAnswer" property="isRightAnswer"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAll" resultMap="QuestionWithSubjectDetail">
+        select Question.id,
+               Question.text,
+               Question.content,
+               Question.idSubject,
+               Question.createdDate,
+               Question.status,
+               O.id      as O_id,
+               O.content as O_content,
+               O.isRightAnswer,
+               qIi.sId   as S_id,
+               qIi.sName,
+               qIi.description
+                from Question
+                inner join (select Question.id as qId, S.id as sId, S.name as sName, S.description
+                            from Question
+                                         join Subject S on S.id = Question.idSubject
+                                         join [User] U on U.email = S.idUser
+        <where>
+            <if test="question.id != null">
+                and Question.id = #{question.id}
+            </if>
+            <if test="question.subject.idUser != null and question.subject.idUser != ''">
+                and S.idUser = #{question.subject.idUser}
+            </if>
+        </where>
+        order by Question.id
+        offset #{offset} rows fetch next #{limit} rows only) as qIi on Question.id = qId
+                left join [Option] O on Question.id = O.idQuestion
+        <where>
+            <if test="question.content != null and question.content != ''">
+                and Question.content like '%' + #{question.content} + '%'
+            </if>
+            <if test="question.status != null">
+                and Question.status = #{question.status}
+            </if>
+            <if test="question.idSubject != null">
+                and Question.idSubject = #{question.idSubject}
+            </if>
+        </where>
+        order by Question.content
+    </select>
+
+    <select id="selectWithUser" resultType="com.bac.quizonline.model.entity.Question">
+        select top (1) Question.id, Question.status
+        from Question
+                     join Subject S on S.id = Question.idSubject
+                     join [User] U on U.email = S.idUser
+        where Question.id = #{id}
+          and U.email = #{subject.idUser}
+    </select>
+    <resultMap id="BaseQuestionWithOptions" type="com.bac.quizonline.model.entity.Question">
+        <id column="id" property="id"/>
+        <result column="text" property="text"/>
+        <result column="content" property="content"/>
+        <result column="idSubject" property="idSubject"/>
+        <result column="createdDate" property="createdDate"/>
+        <result column="status" property="status"/>
+        <collection property="options" ofType="com.bac.quizonline.model.entity.Option">
+            <id column="O_id" property="id"/>
+            <result column="O_content" property="content"/>
+            <result column="isRightAnswer" property="isRightAnswer"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectOneWithOffset" resultMap="BaseQuestionWithOptions">
+        select Question.id,
+               text,
+               Question.content,
+               idSubject,
+               createdDate,
+               status,
+               O.id      as O_id,
+               O.content as O_content,
+               isRightAnswer,
+               idQuestion
+        from Question
+                     inner join (select Q.id
+                                 from Question as Q
+                                              join Subject S on S.id = #{idSubject} and Q.status = 1
+                                 order by Q.id
+                                 offset #{offset} rows fetch next 1 rows only) as QS
+                on QS.id = Question.id
+                     join [Option] O on Question.id = O.idQuestion
+        where idSubject = #{idSubject}
+    </select>
+
+    <select id="getQuestionsForQuiz" resultMap="BaseQuestionWithOptions">
+        select Question.id,
+               text,
+               Question.content,
+               idSubject,
+               createdDate,
+               status,
+               O.id      as O_id,
+               O.content as O_content,
+               isRightAnswer,
+               idQuestion
+        from Question
+                     inner join (select Q.id
+                                 from Question as Q
+                                              join Subject S on Q.idSubject = S.id
+                                 where idSubject = #{idSubject}
+                                   and Q.status = 1
+                                 order by Q.id
+                                 offset #{begin} rows fetch next (#{end} - #{begin} + 1) rows only) as QS
+                on QS.id = Question.id
+                     join [Option] O on Question.id = O.idQuestion
+        where idSubject = #{idSubject}
+        order by QS.id
+    </select>
+</mapper>

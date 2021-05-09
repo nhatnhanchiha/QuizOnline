@@ -1,0 +1,6 @@
+Open with maven project and use maven to initial this project
+Change info of quizonline\src\main\resources\jdbc.properties with your database info
+Change info of quizonline\src\main\resources\log4j.properties with your disk info
+Make sure you IDE (Not recommend: NetBeans) enabled (default: not enabled) annotation processing. Read more: https://www.baeldung.com/lombok-ide
+
+Build and Run

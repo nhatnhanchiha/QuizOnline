@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.TakenSubjectDetailMapper">
+  <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.TakenSubjectDetail">
+    <!--@mbg.generated-->
+    <!--@Table [TakenSubjectDetail]-->
+    <result column="idTakenSubject" property="idTakenSubject" />
+    <result column="idQuestion" property="idQuestion" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    [idTakenSubject], [idQuestion]
+  </sql>
+  <insert id="insert" parameterType="com.bac.quizonline.model.entity.TakenSubjectDetail">
+    <!--@mbg.generated-->
+    insert into [TakenSubjectDetail] ([idTakenSubject], [idQuestion])
+    values (#{idTakenSubject}, #{idQuestion})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bac.quizonline.model.entity.TakenSubjectDetail">
+    <!--@mbg.generated-->
+    insert into [TakenSubjectDetail]
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idTakenSubject != null">
+        [idTakenSubject],
+      </if>
+      <if test="idQuestion != null">
+        [idQuestion],
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idTakenSubject != null">
+        #{idTakenSubject},
+      </if>
+      <if test="idQuestion != null">
+        #{idQuestion},
+      </if>
+    </trim>
+  </insert>
+</mapper>

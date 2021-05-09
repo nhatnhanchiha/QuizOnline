@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.Role">
+        <!--@mbg.generated-->
+        <!--@Table [Role]-->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [id], [name]
+    </sql>
+    <select id="getAllRole" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from Role;
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from [Role]
+        where [id] = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+        <!--@mbg.generated-->
+        delete
+        from [Role]
+        where [id] = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Role"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Role] ([name])
+        values (#{name})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Role"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Role]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                [name],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.Role">
+        <!--@mbg.generated-->
+        update [Role]
+        <set>
+            <if test="name != null and name != ''">
+                [name] = #{name},
+            </if>
+        </set>
+        where [id] = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.Role">
+        <!--@mbg.generated-->
+        update [Role]
+        set [name] = #{name}
+        where [id] = #{id}
+    </update>
+</mapper>

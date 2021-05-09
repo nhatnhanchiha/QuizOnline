@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.TakenSubjectMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.TakenSubject">
+        <!--@mbg.generated-->
+        <!--@Table [TakenSubject]-->
+        <id column="id" property="id"/>
+        <result column="idSubject" property="idSubject"/>
+        <result column="idUser" property="idUser"/>
+        <result column="startTime" property="startTime"/>
+        <result column="endTime" property="endTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [id], [idSubject], [idUser], [startTime], [endTime]
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from [TakenSubject]
+        where [id] = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from [TakenSubject]
+        where [id] = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.TakenSubject"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [TakenSubject] ([idSubject], [idUser], [startTime], [endTime])
+        values (#{idSubject}, #{idUser}, #{startTime}, #{endTime})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.bac.quizonline.model.entity.TakenSubject" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [TakenSubject]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="idSubject != null">
+                [idSubject],
+            </if>
+            <if test="idUser != null and idUser != ''">
+                [idUser],
+            </if>
+            <if test="startTime != null">
+                [startTime],
+            </if>
+            <if test="endTime != null">
+                [endTime],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="idSubject != null">
+                #{idSubject},
+            </if>
+            <if test="idUser != null and idUser != ''">
+                #{idUser},
+            </if>
+            <if test="startTime != null">
+                #{startTime},
+            </if>
+            <if test="endTime != null">
+                #{endTime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.TakenSubject">
+        <!--@mbg.generated-->
+        update [TakenSubject]
+        <set>
+            <if test="idSubject != null">
+                [idSubject] = #{idSubject},
+            </if>
+            <if test="idUser != null and idUser != ''">
+                [idUser] = #{idUser},
+            </if>
+            <if test="startTime != null">
+                [startTime] = #{startTime},
+            </if>
+            <if test="endTime != null">
+                [endTime] = #{endTime},
+            </if>
+        </set>
+        where [id] = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.TakenSubject">
+        <!--@mbg.generated-->
+        update [TakenSubject]
+        set [idSubject] = #{idSubject},
+            [idUser]    = #{idUser},
+            [startTime] = #{startTime},
+            [endTime]   = #{endTime}
+        where [id] = #{id}
+    </update>
+
+    <select id="selectByIdSubjectAndIdUser" resultMap="BaseResultMap">
+        select top (1) id, idSubject, idUser, startTime, endTime
+        from TakenSubject
+        where idUser = #{idUser}
+          and idSubject = #{idSubject}
+        order by endTime desc
+    </select>
+
+    <resultMap id="TakenQuizWithSubject" type="com.bac.quizonline.model.entity.TakenSubject">
+        <id column="TS_id" property="id"/>
+        <result column="TS_idSubject" property="idSubject"/>
+        <result column="TS_idUser" property="idUser"/>
+        <result column="TS_endTime" property="endTime"/>
+        <association property="subject" javaType="com.bac.quizonline.model.entity.Subject">
+            <result column="S_name" property="name"/>
+            <result column="S_numberOfQuestionInQuiz" property="numberOfQuestionInQuiz"/>
+        </association>
+        <collection property="takenSubjectDetails" ofType="com.bac.quizonline.model.entity.TakenSubjectDetail">
+            <id property="idQuestion" column="TDS_idQuestion"/>
+            <id property="idTakenSubject" column="TDS_idTakenSubject"/>
+            <association property="question" javaType="com.bac.quizonline.model.entity.Question">
+                <id column="Q_id" property="id"/>
+                <result property="text" column="Q_text"/>
+                <result property="content" column="Q_content"/>
+                <collection property="options" ofType="com.bac.quizonline.model.entity.Option">
+                    <id column="O_id" property="id"/>
+                    <result property="content" column="O_content"/>
+                    <result property="isRightAnswer" column="O_isRightAnswer"/>
+                </collection>
+            </association>
+            <collection property="answerDetails" ofType="com.bac.quizonline.model.entity.AnswerDetail">
+                <id column="AD_idOption" property="idOption"/>
+                <id column="AD_idQuestion" property="idQuestion"/>
+                <id column="AD_idTakenSubject" property="idTakenSubject"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <resultMap id="history" type="com.bac.quizonline.model.entity.TakenSubject">
+        <id column="TS_id" property="id"/>
+        <result column="TS_idSubject" property="idSubject"/>
+        <result column="TS_idUser" property="idUser"/>
+        <result column="TS_startTime" property="startTime"/>
+        <result column="TS_endTime" property="endTime"/>
+        <association property="subject" javaType="com.bac.quizonline.model.entity.Subject">
+            <result column="S_name" property="name"/>
+            <result column="S_numberOfQuestionInQuiz" property="numberOfQuestionInQuiz"/>
+        </association>
+        <collection property="takenSubjectDetails" ofType="com.bac.quizonline.model.entity.TakenSubjectDetail">
+            <id property="idQuestion" column="TDS_idQuestion"/>
+            <id property="idTakenSubject" column="TDS_idTakenSubject"/>
+            <association property="question" javaType="com.bac.quizonline.model.entity.Question">
+                <id column="Q_id" property="id"/>
+                <result property="text" column="Q_text"/>
+                <result property="content" column="Q_content"/>
+                <collection property="options" ofType="com.bac.quizonline.model.entity.Option">
+                    <id column="O_id" property="id"/>
+                    <result property="content" column="O_content"/>
+                    <result property="isRightAnswer" column="O_isRightAnswer"/>
+                </collection>
+            </association>
+            <collection property="answerDetails" ofType="com.bac.quizonline.model.entity.AnswerDetail">
+                <id column="AD_idOption" property="idOption"/>
+                <id column="AD_idQuestion" property="idQuestion"/>
+                <id column="AD_idTakenSubject" property="idTakenSubject"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="getHistory" resultMap="history">
+        select TakenSubject.id          as TS_id,
+               TakenSubject.idSubject   as TS_idSubject,
+               TakenSubject.idUser      as TS_idUser,
+               TakenSubject.startTime   as TS_startTime,
+               TakenSubject.endTime     as TS_endTime,
+               S.name                   as S_name,
+               S.numberOfQuestionInQuiz as S_numberOfQuestionInQuiz,
+               [TST*].idTakenSubject    as TDS_idTakenSubject,
+               [TST*].idQuestion        as TDS_idQuestion,
+               Q.id                     as Q_id,
+               Q.content                as Q_content,
+               Q.text                   as Q_text,
+               O.id                     as O_id,
+               O.content                as O_content,
+               O.isRightAnswer          as O_isRightAnswer,
+               AD.idQuestion            as AD_idQuestion,
+               AD.idTakenSubject        as AD_idTakenSubject,
+               AD.idOption              as AD_idOption
+        from TakenSubject
+                     inner join (select id, idSubject, idUser, startTime, endTime, idTakenSubject, idQuestion
+                                 from TakenSubject
+                                              join TakenSubjectDetail TSD on TakenSubject.id = TSD.idTakenSubject
+                                 where id = #{id}
+                ) as [TST*] on [TST*].id = TakenSubject.id
+                     join Subject S on S.id = TakenSubject.idSubject
+                     join Question Q on Q.id = [TST*].idQuestion
+                     join [Option] O on Q.id = O.idQuestion
+                     left join AnswerDetail AD
+                on [TST*].idTakenSubject = AD.idTakenSubject and [TST*].idQuestion = AD.idQuestion and
+                   O.id = AD.idOption
+    </select>
+
+    <select id="getFullDetail" resultMap="TakenQuizWithSubject">
+        select TakenSubject.id          as TS_id,
+               TakenSubject.idSubject   as TS_idSubject,
+               TakenSubject.idUser      as TS_idUser,
+               TakenSubject.endTime     as TS_endTime,
+               [TST*].idTakenSubject    as TDS_idTakenSubject,
+               [TST*].idQuestion        as TDS_idQuestion,
+               S.name                   as S_name,
+               S.numberOfQuestionInQuiz as S_numberOfQuestionInQuiz,
+               Q.id                     as Q_id,
+               Q.content                as Q_content,
+               Q.text                   as Q_text,
+               O.id                     as O_id,
+               O.content                as O_content,
+               O.isRightAnswer          as O_isRightAnswer,
+               AD.idQuestion            as AD_idQuestion,
+               AD.idTakenSubject        as AD_idTakenSubject,
+               AD.idOption              as AD_idOption
+        from TakenSubject
+                     inner join (select id, idSubject, idUser, startTime, endTime, idTakenSubject, idQuestion
+                                 from TakenSubject
+                                              join TakenSubjectDetail TSD on TakenSubject.id = TSD.idTakenSubject
+                                 where id = #{id}
+                                 order by TakenSubject.id
+                                 offset #{offset} rows fetch next #{limit} rows only
+                ) as [TST*] on [TST*].id = TakenSubject.id
+                     join Subject S on S.id = TakenSubject.idSubject
+                     join Question Q on Q.id = [TST*].idQuestion
+                     join [Option] O on Q.id = O.idQuestion
+                     left join AnswerDetail AD
+                on [TST*].idTakenSubject = AD.idTakenSubject and [TST*].idQuestion = AD.idQuestion and
+                   O.id = AD.idOption
+    </select>
+
+    <update id="endTakenSubject">
+        update TakenSubject
+        set endTime = #{takenSubject.endTime}
+        where id = #{takenSubject.id};
+    </update>
+
+    <select id="getValidTakenSubject" resultMap="BaseResultMap">
+        select id, idSubject, idUser, startTime, endTime
+        from TakenSubject
+        where id = #{id}
+          and idUser = #{idUser};
+    </select>
+
+    <resultMap id="HistoryList" type="com.bac.quizonline.model.entity.TakenSubject">
+        <id column="TS_id" property="id"/>
+        <result column="TS_idSubject" property="idSubject"/>
+        <result column="TS_endTime" property="endTime"/>
+        <association property="subject" javaType="com.bac.quizonline.model.entity.Subject">
+            <result property="name" column="S_name"/>
+        </association>
+    </resultMap>
+
+    <select id="selectHistoryByIdUser" resultMap="HistoryList">
+        select TakenSubject.id as TS_id,
+               idSubject       as TS_idSubject,
+               endTime         as TS_endTime,
+               S.name          as S_name
+        from TakenSubject
+                     join Subject S on S.id = TakenSubject.idSubject
+        <where>
+            TakenSubject.idUser = #{idUser}
+                    and current_timestamp > endTime
+            <if test="nameOrIdSubject != null and nameOrIdSubject != ''">
+                and S.name like '%' + #{nameOrIdSubject} + '%'
+                <if test="orIdSubject != null">
+                    or S.id = #{nameOrIdSubject}
+                </if>
+            </if>
+        </where>
+
+        order by TakenSubject.id desc
+        offset #{offset} rows fetch next #{limit} rows only
+    </select>
+</mapper>

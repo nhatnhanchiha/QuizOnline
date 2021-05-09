@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.AnswerDetailMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.AnswerDetail">
+        <!--@mbg.generated-->
+        <!--@Table [AnswerDetail]-->
+        <id column="idTakenSubject" property="idTakenSubject"/>
+        <id column="idQuestion" property="idQuestion"/>
+        <id column="idOption" property="idOption"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [idTakenSubject], [idQuestion], [idOption]
+    </sql>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        <!--@mbg.generated-->
+        delete
+        from [AnswerDetail]
+        where [idTakenSubject] = #{idTakenSubject}
+          and [idQuestion] = #{idQuestion}
+          and [idOption] = #{idOption}
+    </delete>
+    <insert id="insert" parameterType="com.bac.quizonline.model.entity.AnswerDetail">
+        <!--@mbg.generated-->
+        insert into [AnswerDetail] ([idTakenSubject], [idQuestion], [idOption])
+        values (#{idTakenSubject}, #{idQuestion}, #{idOption})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bac.quizonline.model.entity.AnswerDetail">
+        <!--@mbg.generated-->
+        insert into [AnswerDetail]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="idTakenSubject != null">
+                [idTakenSubject],
+            </if>
+            <if test="idQuestion != null">
+                [idQuestion],
+            </if>
+            <if test="idOption != null">
+                [idOption],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="idTakenSubject != null">
+                #{idTakenSubject},
+            </if>
+            <if test="idQuestion != null">
+                #{idQuestion},
+            </if>
+            <if test="idOption != null">
+                #{idOption},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="queryByPrimaryKey" resultMap="BaseResultMap">
+        select top (1) idTakenSubject, idQuestion, idOption
+        from AnswerDetail
+        where idQuestion = #{idOption}
+          and idTakenSubject = #{idTakenSubject}
+          and idOption = #{idOption}
+    </select>
+
+    <delete id="deleteByIdTakenSubjectAndIdQuestion">
+        delete
+        from [AnswerDetail]
+        where [idTakenSubject] = #{idTakenSubject}
+          and [idQuestion] = #{idQuestion}
+    </delete>
+</mapper>

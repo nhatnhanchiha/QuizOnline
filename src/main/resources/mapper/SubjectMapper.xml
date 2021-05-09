@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.SubjectMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.Subject">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="minutes" property="minutes"/>
+        <result column="numberOfQuestionInQuiz" property="numberOfQuestionInQuiz"/>
+        <result column="status" property="status"/>
+        <result column="idUser" property="idUser"/>
+    </resultMap>
+    <resultMap id="DetailedSubjectResultMap" type="com.bac.quizonline.model.entity.Subject">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="minutes" property="minutes"/>
+        <result column="numberOfQuestionInQuiz" property="numberOfQuestionInQuiz"/>
+        <result column="status" property="status"/>
+        <result column="idUser" property="idUser"/>
+        <association property="user" javaType="com.bac.quizonline.model.entity.User">
+            <id column="email" property="email"/>
+            <result column="U_name" property="name"/>
+            <result column="password" property="password"/>
+            <result column="roleId" property="roleId"/>
+            <result column="status" property="status"/>
+        </association>
+        <collection property="questions" ofType="com.bac.quizonline.model.entity.Question" notNullColumn="Q_id"
+                    javaType="List">
+            <id column="Q_id" property="id"/>
+            <result column="text" property="text"/>
+            <result column="content" property="content"/>
+            <result column="idSubject" property="idSubject"/>
+            <result column="createdDate" property="createdDate"/>
+            <result column="status" property="status"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [id], [name], [description], [minutes], [numberOfQuestionInQuiz], [status], [idUser]
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="DetailedSubjectResultMap">
+        <!--@mbg.generated-->
+        select Subject.id,
+               Subject.name,
+               Subject.description,
+               Subject.minutes,
+               Subject.numberOfQuestionInQuiz,
+               Subject.status,
+               Subject.idUser,
+               Q.id   as Q_id,
+               Q.text,
+               Q.content,
+               Q.idSubject,
+               Q.createdDate,
+               Q.status,
+               U.email,
+               U.name as U_name,
+               U.password,
+               U.roleId,
+               U.status
+        from [Subject]
+                     left join Question Q on Subject.id = Q.idSubject
+                     join [User] U on U.email = Subject.idUser
+        where [Subject].id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from [Subject]
+        where [id] = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Subject"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Subject] ([name], [description], [minutes], [numberOfQuestionInQuiz], [status],
+                               [idUser])
+        values (#{name}, #{description}, #{minutes}, #{numberOfQuestionInQuiz}, #{status},
+                #{idUser})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Subject"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Subject]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                [name],
+            </if>
+            <if test="description != null and description != ''">
+                [description],
+            </if>
+            <if test="minutes != null">
+                [minutes],
+            </if>
+            <if test="numberOfQuestionInQuiz != null">
+                [numberOfQuestionInQuiz],
+            </if>
+            <if test="status != null">
+                [status],
+            </if>
+            <if test="idUser != null and idUser != ''">
+                [idUser],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="description != null and description != ''">
+                #{description},
+            </if>
+            <if test="minutes != null">
+                #{minutes},
+            </if>
+            <if test="numberOfQuestionInQuiz != null">
+                #{numberOfQuestionInQuiz},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="idUser != null and idUser != ''">
+                #{idUser},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.Subject">
+        <!--@mbg.generated-->
+        update [Subject]
+        <set>
+            <if test="name != null and name != ''">
+                [name] = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                [description] = #{description},
+            </if>
+            <if test="minutes != null">
+                [minutes] = #{minutes},
+            </if>
+            <if test="numberOfQuestionInQuiz != null">
+                [numberOfQuestionInQuiz] = #{numberOfQuestionInQuiz},
+            </if>
+            <if test="status != null">
+                [status] = #{status},
+            </if>
+            <if test="idUser != null and idUser != ''">
+                [idUser] = #{idUser},
+            </if>
+        </set>
+        where [id] = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.Subject">
+        <!--@mbg.generated-->
+        update [Subject]
+        set [name]                   = #{name},
+            [description]            = #{description},
+            [minutes]                = #{minutes},
+            [numberOfQuestionInQuiz] = #{numberOfQuestionInQuiz},
+            [status]                 = #{status},
+            [idUser]                 = #{idUser}
+        where [id] = #{id}
+    </update>
+
+    <select id="getAllSubject" resultMap="BaseResultMap">
+        select id, name, description, minutes, numberOfQuestionInQuiz, status
+        from Subject
+        <where>
+            <if test="subject != null">
+                <if test="subject.id != null">
+                    and id = #{subject.id}
+                </if>
+                <if test="subject.name != null and subject.name != ''">
+                    or name like '%' + #{subject.name} + '%'
+                </if>
+                <if test="subject.numberOfQuestionInQuiz != null">
+                    and numberOfQuestionInQuiz = #{subject.numberOfQuestionInQuiz}
+                </if>
+                <if test="subject.minutes != null">
+                    and minutes = #{subject.minutes}
+                </if>
+                <if test="subject.status != null">
+                    and status = #{subject.status}
+                </if>
+            </if>
+        </where>
+        order by id desc
+        offset #{offset} rows fetch next #{limit} rows only
+    </select>
+
+    <select id="getAllCreatedSubject" resultMap="BaseResultMap">
+        select id, Subject.name
+        from Subject
+                     join [User] U on U.email = Subject.idUser
+        where U.email = #{idUser}
+    </select>
+
+    <select id="selectOne" resultMap="BaseResultMap">
+        select id, name, description, minutes, numberOfQuestionInQuiz, status, idUser
+        from Subject
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like '%' + #{name} + '%'
+            </if>
+            <if test="description != null and description != ''">
+                and description like '%' + #{description} + '%'
+            </if>
+            <if test="minutes != null">
+                and minutes = #{minutes}
+            </if>
+            <if test="numberOfQuestionInQuiz != null">
+                and numberOfQuestionInQuiz = #{numberOfQuestionInQuiz}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="idUser != null and idUser != ''">
+                and idUser = #{idUser}
+            </if>
+        </where>
+    </select>
+
+    <select id="countValidQuestion" resultType="int">
+        select COUNT(*)
+        from Subject
+                     join Question Q on Subject.id = Q.idSubject
+        where idSubject = #{idSubject} and Q.status = 1
+    </select>
+</mapper>

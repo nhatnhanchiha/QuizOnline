@@ -1,0 +1,2656 @@
+CREATE DATABASE [QuizOnline]
+/****** Make sure that you run this command first  Script Date: 2/26/2021 12:03:46 AM ******/
+
+USE [QuizOnline]
+GO
+/****** Object:  Table [dbo].[AnswerDetail]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AnswerDetail](
+	[idTakenSubject] [int] NOT NULL,
+	[idQuestion] [int] NOT NULL,
+	[idOption] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Option]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Option](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[content] [nvarchar](1024) NOT NULL,
+	[isRightAnswer] [bit] NULL,
+	[idQuestion] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Question]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Question](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[text] [nvarchar](256) NOT NULL,
+	[content] [nvarchar](1024) NULL,
+	[idSubject] [int] NOT NULL,
+	[createdDate] [date] NULL,
+	[status] [bit] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[id] [smallint] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](256) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Subject]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Subject](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](256) NOT NULL,
+	[description] [nvarchar](450) NOT NULL,
+	[minutes] [float] NOT NULL,
+	[numberOfQuestionInQuiz] [int] NOT NULL,
+	[status] [bit] NULL,
+	[idUser] [nvarchar](256) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TakenSubject]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TakenSubject](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[idSubject] [int] NOT NULL,
+	[idUser] [nvarchar](256) NOT NULL,
+	[startTime] [datetime] NULL,
+	[endTime] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TakenSubjectDetail]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TakenSubjectDetail](
+	[idTakenSubject] [int] NOT NULL,
+	[idQuestion] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 2/26/2021 12:03:46 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[email] [nvarchar](256) NOT NULL,
+	[name] [nvarchar](250) NOT NULL,
+	[password] [nvarchar](256) NOT NULL,
+	[roleId] [smallint] NOT NULL,
+	[status] [bit] NOT NULL
+) ON [PRIMARY]
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (175, 6, 5)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (175, 9, 18)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (223, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (223, 13, 22)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (223, 13, 23)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (223, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (223, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (225, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (225, 13, 22)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (225, 13, 23)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (225, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (227, 13, 21)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (227, 13, 23)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (227, 16, 31)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (227, 19, 38)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (228, 13, 21)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (228, 13, 22)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (228, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (229, 6, 4)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (229, 6, 5)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (229, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (229, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (229, 17, 40)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (230, 6, 4)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (230, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (231, 6, 4)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (231, 9, 17)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (231, 9, 18)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (232, 9, 16)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (232, 9, 17)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (234, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (234, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (234, 19, 37)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (235, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (235, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (235, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (235, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (235, 17, 40)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (237, 10, 6)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (237, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (237, 16, 31)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (238, 10, 6)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (238, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (238, 20, 41)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (238, 20, 42)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (239, 9, 17)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (239, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (239, 12, 20)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (245, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (245, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (246, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (247, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (247, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (248, 12, 12)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (248, 19, 37)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (251, 19, 38)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (252, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (254, 13, 22)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (261, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (265, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (273, 9, 16)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (273, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (273, 15, 27)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (273, 16, 32)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (273, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (276, 9, 17)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (276, 13, 22)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (276, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (276, 16, 31)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (276, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (277, 20, 41)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (277, 20, 42)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (277, 20, 43)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (278, 10, 6)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (278, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (278, 10, 8)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (278, 10, 15)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (281, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (281, 10, 8)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (282, 10, 7)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (282, 10, 8)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (283, 17, 34)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (286, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (286, 15, 29)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (286, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (287, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (287, 15, 29)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (287, 17, 40)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (288, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (288, 15, 27)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (288, 17, 33)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (294, 10, 6)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (295, 14, 26)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (295, 15, 28)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (295, 17, 40)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (296, 14, 25)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (296, 15, 28)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (296, 17, 40)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (297, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (297, 12, 12)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (297, 12, 20)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (299, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (299, 12, 12)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (299, 12, 20)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (300, 12, 11)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (300, 12, 12)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (300, 12, 20)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (301, 22, 48)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (301, 23, 52)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (302, 21, 45)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (302, 21, 46)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (302, 21, 50)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (302, 21, 56)
+GO
+INSERT [dbo].[AnswerDetail] ([idTakenSubject], [idQuestion], [idOption]) VALUES (302, 22, 49)
+GO
+SET IDENTITY_INSERT [dbo].[Option] ON 
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (4, N'2', 1, 6)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (5, N'3', 1, 6)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (6, N'WTO', 1, 10)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (7, N'EU', 1, 10)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (8, N'ASEAN', 1, 10)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (9, N'1', 1, 11)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (10, N'1', 1, 11)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (11, N'cascsa', 1, 12)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (12, N' cacsa', 1, 12)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (13, N'NAFTA', 0, NULL)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (15, N'ABC', 1, 10)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (16, N'1', 0, 9)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (20, N'Abc', 1, 12)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (21, N'Viá»t Nam', 1, 13)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (22, N'HÃ  Ná»i', 0, 13)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (23, N'Báº¯c Giang', 0, 13)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (24, N'Nghá» An', 0, 13)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (25, N'Viá»t Nam', 1, 14)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (26, N'HÃ  Ná»i', 0, 14)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (27, N'cd', 1, 15)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (28, N'ef', 0, 15)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (29, N'gh', 0, 15)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (30, N'lm', 0, 15)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (31, N'as', 0, 16)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (32, N'fasd', 1, 16)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (33, N'ads', 1, 17)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (34, N'afdfewe', 0, 17)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (35, N'222222222', 1, 18)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (36, N'2222', 1, 18)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (41, N'7', 0, 20)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (42, N'8', 0, 20)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (43, N'9', 1, 20)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (44, N'10', 1, 20)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (45, N'11', 1, 21)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (46, N'11', 0, 21)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (47, N'22', 0, 22)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (48, N'22', 1, 22)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (49, N'22', 0, 22)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (51, N'11', 0, 23)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (52, N'22', 1, 23)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (54, N'Abc', 0, 11)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (55, N'Bcd', 0, 11)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (56, N'22', 1, 21)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (57, N'33', 1, 24)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (58, N'33', 0, 24)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (59, N'55', 1, 25)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (60, N'55', 1, 25)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (61, N'44', 0, 26)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (62, N'44', 0, 26)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (63, N'44', 1, 26)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (64, N'44', 0, 26)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (65, N'99', 1, 27)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (66, N'99', 0, 27)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (67, N'88', 0, 28)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (68, N'88', 1, 28)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (69, N'88', 0, 28)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (70, N'o1', 0, 29)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (71, N'o2r', 1, 29)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (72, N'o3', 0, 29)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (73, N'1r', 1, 30)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (74, N'3', 0, 30)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (75, N'4', 0, 30)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (76, N'1', 0, 31)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (77, N'2r', 1, 31)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (17, N'2', 0, 9)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (18, N'3', 0, 9)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (19, N'4', 1, 9)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (50, N'11', 0, 21)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (37, N'11111111', 1, 19)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (38, N'1111', 1, 19)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (39, N'1111111', 1, 19)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (40, N'acx', 0, 17)
+GO
+INSERT [dbo].[Option] ([id], [content], [isRightAnswer], [idQuestion]) VALUES (53, N'33', 0, 23)
+GO
+SET IDENTITY_INSERT [dbo].[Option] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Question] ON 
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (6, N'Chon cau tra loi dung', N'1 + 1 = 2', 6, CAST(N'2021-02-09' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (9, N'Chon cau dung', N'2 + 2', 7, CAST(N'2021-02-09' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (10, N'Anh em chọn câu đúng:', N'Năm 1996', 6, CAST(N'2021-02-10' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (11, N'1', N'1', 6, CAST(N'2021-02-10' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (12, N'Chon cau dung', N'csacsaca', 6, CAST(N'2021-02-11' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (13, N'Chá»n cÃ¢u sai', N'ÄÃ¢u lÃ  ÄÃ¢y', 7, CAST(N'2021-02-15' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (14, N'Chá»n cÃ¢u sai', N'ÄÃ¢u lÃ  ÄÃ¢y', 7, CAST(N'2021-02-15' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (15, N'Chọn câu sai', N'Abc', 7, CAST(N'2021-02-15' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (16, N'Chọn câu sai', N'gdsf', 7, CAST(N'2021-02-15' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (17, N'Chọn câu sai', N'fdasf', 7, CAST(N'2021-02-15' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (18, N'222222222222222', N'222222222', 6, CAST(N'2021-02-15' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (19, N'1111111', N'1111111111111', 6, CAST(N'2021-02-15' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (20, N'Chọn câu sai', N'123456', 6, CAST(N'2021-02-17' AS Date), 0)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (21, N'11', N'11', 8, CAST(N'2021-02-18' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (22, N'22', N'22', 8, CAST(N'2021-02-18' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (23, N'11', N'11', 8, CAST(N'2021-02-18' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (24, N'33', N'33', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (25, N'55', N'55', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (26, N'44', N'44', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (27, N'99', N'99', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (28, N'88', N'88', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (29, N'Chọn câu sai', N'123', 8, CAST(N'2021-02-25' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (30, N'Chon cau dung', N'11', 8, CAST(N'2021-02-26' AS Date), 1)
+GO
+INSERT [dbo].[Question] ([id], [text], [content], [idSubject], [createdDate], [status]) VALUES (31, N'Chon cau dung', N'12', 8, CAST(N'2021-02-26' AS Date), 1)
+GO
+SET IDENTITY_INSERT [dbo].[Question] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Role] ON 
+GO
+INSERT [dbo].[Role] ([id], [name]) VALUES (1, N'Student')
+GO
+INSERT [dbo].[Role] ([id], [name]) VALUES (2, N'Admin')
+GO
+SET IDENTITY_INSERT [dbo].[Role] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Subject] ON 
+GO
+INSERT [dbo].[Subject] ([id], [name], [description], [minutes], [numberOfQuestionInQuiz], [status], [idUser]) VALUES (6, N'PRJ321', N'Java Web Application', 1, 1, 1, N'bacnvse141019@fpt.edu.vn')
+GO
+INSERT [dbo].[Subject] ([id], [name], [description], [minutes], [numberOfQuestionInQuiz], [status], [idUser]) VALUES (7, N'JPD121', N'Japanese 2 fundamental', 5, 3, 1, N'bacnvse141019@fpt.edu.vn')
+GO
+INSERT [dbo].[Subject] ([id], [name], [description], [minutes], [numberOfQuestionInQuiz], [status], [idUser]) VALUES (8, N'PRO211', N'Java OOp', 5, 2, 1, N'anhmeohoang789@gmail.com')
+GO
+SET IDENTITY_INSERT [dbo].[Subject] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TakenSubject] ON 
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (1, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T21:24:06.440' AS DateTime), CAST(N'2021-02-15T22:14:36.440' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (3, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:32:09.617' AS DateTime), CAST(N'2021-02-15T23:22:39.617' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (4, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:33:06.507' AS DateTime), CAST(N'2021-02-15T23:23:36.507' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (5, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:34:25.147' AS DateTime), CAST(N'2021-02-15T23:24:55.147' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (6, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:34:58.037' AS DateTime), CAST(N'2021-02-15T23:25:28.037' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (70, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:48:57.157' AS DateTime), CAST(N'2021-02-16T00:39:27.157' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (71, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:49:01.513' AS DateTime), CAST(N'2021-02-16T00:39:31.513' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (72, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:49:07.617' AS DateTime), CAST(N'2021-02-16T00:39:37.617' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (73, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T09:46:51.860' AS DateTime), CAST(N'2021-02-16T10:37:21.860' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (77, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T09:49:08.773' AS DateTime), CAST(N'2021-02-16T10:39:38.773' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (79, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T09:49:53.470' AS DateTime), CAST(N'2021-02-16T10:40:23.470' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (124, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:21:14.447' AS DateTime), CAST(N'2021-02-16T11:11:44.447' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (125, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:28:47.647' AS DateTime), CAST(N'2021-02-16T11:19:17.647' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (133, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:59:07.497' AS DateTime), CAST(N'2021-02-16T11:49:37.497' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (135, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:02:19.147' AS DateTime), CAST(N'2021-02-16T11:52:49.147' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (136, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:31:10.097' AS DateTime), CAST(N'2021-02-16T12:21:40.097' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (138, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:32:49.783' AS DateTime), CAST(N'2021-02-16T12:23:19.783' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (147, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:09:34.880' AS DateTime), CAST(N'2021-02-16T22:59:34.880' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (148, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:10:19.427' AS DateTime), CAST(N'2021-02-16T23:00:19.427' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (154, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:20:55.633' AS DateTime), CAST(N'2021-02-16T23:10:55.633' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (157, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:24:09.863' AS DateTime), CAST(N'2021-02-16T23:14:09.863' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (158, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:26:24.790' AS DateTime), CAST(N'2021-02-16T23:16:24.790' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (8, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:58:40.883' AS DateTime), CAST(N'2021-02-15T23:49:10.883' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (9, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:59:25.320' AS DateTime), CAST(N'2021-02-15T23:49:55.320' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (10, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T22:59:32.157' AS DateTime), CAST(N'2021-02-15T23:50:02.157' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (11, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:04:29.170' AS DateTime), CAST(N'2021-02-15T23:54:59.170' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (12, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:04:42.863' AS DateTime), CAST(N'2021-02-15T23:55:12.863' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (14, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:37.580' AS DateTime), CAST(N'2021-02-15T23:57:07.580' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (15, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:39.263' AS DateTime), CAST(N'2021-02-15T23:57:09.263' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (16, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:40.040' AS DateTime), CAST(N'2021-02-15T23:57:10.040' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (17, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:40.673' AS DateTime), CAST(N'2021-02-15T23:57:10.673' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (18, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:41.303' AS DateTime), CAST(N'2021-02-15T23:57:11.303' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (19, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:41.850' AS DateTime), CAST(N'2021-02-15T23:57:11.850' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (20, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:50.133' AS DateTime), CAST(N'2021-02-15T23:57:20.133' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (21, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:50.900' AS DateTime), CAST(N'2021-02-15T23:57:20.900' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (22, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:06:54.593' AS DateTime), CAST(N'2021-02-15T23:57:24.593' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (150, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:11:59.860' AS DateTime), CAST(N'2021-02-16T23:01:59.860' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (152, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:16:08.623' AS DateTime), CAST(N'2021-02-16T23:06:08.623' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (153, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:16:33.380' AS DateTime), CAST(N'2021-02-16T23:06:33.380' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (160, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:28:26.657' AS DateTime), CAST(N'2021-02-16T23:18:26.657' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (165, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:35:29.067' AS DateTime), CAST(N'2021-02-16T23:25:29.067' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (169, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:43:48.193' AS DateTime), CAST(N'2021-02-16T23:33:48.193' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (170, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:47:09.203' AS DateTime), CAST(N'2021-02-16T23:37:09.203' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (173, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:52:51.833' AS DateTime), CAST(N'2021-02-16T23:42:51.833' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (24, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:08:12.927' AS DateTime), CAST(N'2021-02-15T23:58:42.927' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (25, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:08:19.183' AS DateTime), CAST(N'2021-02-15T23:58:49.183' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (26, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:08:54.453' AS DateTime), CAST(N'2021-02-15T23:59:24.453' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (27, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:06.323' AS DateTime), CAST(N'2021-02-15T23:59:36.323' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (28, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:06.807' AS DateTime), CAST(N'2021-02-15T23:59:36.807' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (29, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:07.280' AS DateTime), CAST(N'2021-02-15T23:59:37.280' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (30, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:07.760' AS DateTime), CAST(N'2021-02-15T23:59:37.760' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (31, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:08.177' AS DateTime), CAST(N'2021-02-15T23:59:38.177' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (32, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:08.737' AS DateTime), CAST(N'2021-02-15T23:59:38.737' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (33, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:09.323' AS DateTime), CAST(N'2021-02-15T23:59:39.323' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (34, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:09.843' AS DateTime), CAST(N'2021-02-15T23:59:39.843' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (35, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:10.367' AS DateTime), CAST(N'2021-02-15T23:59:40.367' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (36, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:10.920' AS DateTime), CAST(N'2021-02-15T23:59:40.920' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (37, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:11.453' AS DateTime), CAST(N'2021-02-15T23:59:41.453' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (38, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:12.060' AS DateTime), CAST(N'2021-02-15T23:59:42.060' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (39, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:12.607' AS DateTime), CAST(N'2021-02-15T23:59:42.607' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (40, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:13.183' AS DateTime), CAST(N'2021-02-15T23:59:43.183' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (41, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:13.847' AS DateTime), CAST(N'2021-02-15T23:59:43.847' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (42, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:14.493' AS DateTime), CAST(N'2021-02-15T23:59:44.493' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (43, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:14.997' AS DateTime), CAST(N'2021-02-15T23:59:44.997' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (44, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:15.483' AS DateTime), CAST(N'2021-02-15T23:59:45.483' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (45, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:16.053' AS DateTime), CAST(N'2021-02-15T23:59:46.053' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (46, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:16.703' AS DateTime), CAST(N'2021-02-15T23:59:46.703' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (47, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:17.260' AS DateTime), CAST(N'2021-02-15T23:59:47.260' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (48, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:17.817' AS DateTime), CAST(N'2021-02-15T23:59:47.817' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (49, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:18.323' AS DateTime), CAST(N'2021-02-15T23:59:48.323' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (50, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:18.953' AS DateTime), CAST(N'2021-02-15T23:59:48.953' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (51, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:19.563' AS DateTime), CAST(N'2021-02-15T23:59:49.563' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (52, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:20.153' AS DateTime), CAST(N'2021-02-15T23:59:50.153' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (53, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:20.770' AS DateTime), CAST(N'2021-02-15T23:59:50.770' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (54, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:21.327' AS DateTime), CAST(N'2021-02-15T23:59:51.327' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (55, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:21.950' AS DateTime), CAST(N'2021-02-15T23:59:51.950' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (56, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:22.617' AS DateTime), CAST(N'2021-02-15T23:59:52.617' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (57, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:23.237' AS DateTime), CAST(N'2021-02-15T23:59:53.237' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (58, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:23.813' AS DateTime), CAST(N'2021-02-15T23:59:53.813' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (59, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:25.090' AS DateTime), CAST(N'2021-02-15T23:59:55.090' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (60, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:37.440' AS DateTime), CAST(N'2021-02-16T00:00:07.440' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (61, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:38.053' AS DateTime), CAST(N'2021-02-16T00:00:08.053' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (62, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:38.670' AS DateTime), CAST(N'2021-02-16T00:00:08.670' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (63, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:39.220' AS DateTime), CAST(N'2021-02-16T00:00:09.220' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (64, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:39.823' AS DateTime), CAST(N'2021-02-16T00:00:09.823' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (65, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:40.387' AS DateTime), CAST(N'2021-02-16T00:00:10.387' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (66, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:40.960' AS DateTime), CAST(N'2021-02-16T00:00:10.960' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (67, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:41.647' AS DateTime), CAST(N'2021-02-16T00:00:11.647' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (68, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:42.267' AS DateTime), CAST(N'2021-02-16T00:00:12.267' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (69, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-15T23:09:42.837' AS DateTime), CAST(N'2021-02-16T00:00:12.837' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (126, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:42:50.690' AS DateTime), CAST(N'2021-02-16T11:33:20.690' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (127, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:43:17.693' AS DateTime), CAST(N'2021-02-16T11:33:47.693' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (128, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:43:19.273' AS DateTime), CAST(N'2021-02-16T11:33:49.273' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (129, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:43:21.330' AS DateTime), CAST(N'2021-02-16T11:33:51.330' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (141, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:37:19.903' AS DateTime), CAST(N'2021-02-16T12:27:19.903' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (143, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:42:00.600' AS DateTime), CAST(N'2021-02-16T12:32:00.600' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (144, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:42:06.730' AS DateTime), CAST(N'2021-02-16T12:32:06.730' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (145, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:42:12.507' AS DateTime), CAST(N'2021-02-16T12:32:12.507' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (146, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:43:15.917' AS DateTime), CAST(N'2021-02-16T12:33:15.917' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (151, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:13:56.357' AS DateTime), CAST(N'2021-02-16T23:03:56.357' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (178, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T23:57:03.913' AS DateTime), CAST(N'2021-02-17T00:47:03.913' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (179, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T23:57:10.263' AS DateTime), CAST(N'2021-02-17T00:47:10.263' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (180, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T23:57:11.597' AS DateTime), CAST(N'2021-02-17T00:47:11.597' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (187, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:12:23.463' AS DateTime), CAST(N'2021-02-17T01:02:23.463' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (189, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:13:20.667' AS DateTime), CAST(N'2021-02-17T01:03:20.667' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (190, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:13:41.197' AS DateTime), CAST(N'2021-02-17T01:03:41.197' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (191, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:13:48.783' AS DateTime), CAST(N'2021-02-17T01:03:48.783' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (192, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:13:50.057' AS DateTime), CAST(N'2021-02-17T01:03:50.057' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (193, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:13:51.093' AS DateTime), CAST(N'2021-02-17T01:03:51.093' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (195, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:30:26.703' AS DateTime), CAST(N'2021-02-17T01:20:26.703' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (121, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:19:36.287' AS DateTime), CAST(N'2021-02-16T11:10:06.287' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (131, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T10:57:45.527' AS DateTime), CAST(N'2021-02-16T11:48:15.527' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (139, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:35:46.523' AS DateTime), CAST(N'2021-02-16T12:26:16.523' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (140, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T11:36:03.017' AS DateTime), CAST(N'2021-02-16T12:26:33.017' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (167, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:37:31.607' AS DateTime), CAST(N'2021-02-16T23:27:31.607' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (172, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:50:34.143' AS DateTime), CAST(N'2021-02-16T23:40:34.143' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (188, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:12:39.440' AS DateTime), CAST(N'2021-02-17T01:02:39.440' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (196, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:31:04.563' AS DateTime), CAST(N'2021-02-17T01:21:04.563' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (207, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:16.597' AS DateTime), CAST(N'2021-02-17T01:42:16.597' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (208, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:26.063' AS DateTime), CAST(N'2021-02-17T01:42:26.063' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (209, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:36.480' AS DateTime), CAST(N'2021-02-17T01:42:36.480' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (210, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:49.613' AS DateTime), CAST(N'2021-02-17T01:42:49.613' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (211, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:52.410' AS DateTime), CAST(N'2021-02-17T01:42:52.410' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (212, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:52:59.097' AS DateTime), CAST(N'2021-02-17T01:42:59.097' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (213, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:53:01.727' AS DateTime), CAST(N'2021-02-17T01:43:01.727' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (214, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:53:04.377' AS DateTime), CAST(N'2021-02-17T01:43:04.377' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (215, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:53:14.983' AS DateTime), CAST(N'2021-02-17T01:43:14.983' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (216, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:53:24.423' AS DateTime), CAST(N'2021-02-17T01:43:24.423' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (217, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T08:18:26.167' AS DateTime), CAST(N'2021-02-17T09:08:26.167' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (218, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T08:18:32.183' AS DateTime), CAST(N'2021-02-17T09:08:32.183' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (219, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T08:18:41.083' AS DateTime), CAST(N'2021-02-17T09:08:41.083' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (220, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T08:36:59.557' AS DateTime), CAST(N'2021-02-17T09:26:59.557' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (155, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:22:52.337' AS DateTime), CAST(N'2021-02-16T23:12:52.337' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (156, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:23:05.250' AS DateTime), CAST(N'2021-02-16T23:13:05.250' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (166, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:36:31.760' AS DateTime), CAST(N'2021-02-16T23:26:31.760' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (174, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:54:16.447' AS DateTime), CAST(N'2021-02-16T23:44:16.447' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (221, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T09:44:30.143' AS DateTime), CAST(N'2021-02-17T10:34:30.143' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (222, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T09:58:26.770' AS DateTime), CAST(N'2021-02-17T10:48:26.770' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (223, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T09:58:50.100' AS DateTime), CAST(N'2021-02-17T10:48:50.100' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (226, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T11:35:48.227' AS DateTime), CAST(N'2021-02-17T11:39:36.277' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (227, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T11:40:02.153' AS DateTime), CAST(N'2021-02-17T11:40:44.423' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (228, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T11:59:50.930' AS DateTime), CAST(N'2021-02-17T11:59:59.660' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (229, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T12:02:03.963' AS DateTime), CAST(N'2021-02-17T12:02:15.537' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (230, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T12:02:50.147' AS DateTime), CAST(N'2021-02-17T12:03:05.070' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (231, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T13:53:07.060' AS DateTime), CAST(N'2021-02-17T13:53:17.497' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (232, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T13:54:07.670' AS DateTime), CAST(N'2021-02-17T13:54:26.647' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (234, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T13:56:05.147' AS DateTime), CAST(N'2021-02-17T13:56:10.653' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (235, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T15:03:13.873' AS DateTime), CAST(N'2021-02-17T15:04:15.480' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (236, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T13:48:31.360' AS DateTime), CAST(N'2021-02-18T14:00:47.320' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (237, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T13:48:43.190' AS DateTime), CAST(N'2021-02-18T13:53:26.580' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (238, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T13:48:52.210' AS DateTime), CAST(N'2021-02-18T13:51:31.057' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (239, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T13:49:22.993' AS DateTime), CAST(N'2021-02-18T13:50:13.797' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (247, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:02:24.263' AS DateTime), CAST(N'2021-02-18T14:02:34.503' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (248, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:02:40.370' AS DateTime), CAST(N'2021-02-18T14:02:46.933' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (159, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:27:22.063' AS DateTime), CAST(N'2021-02-16T23:17:22.063' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (233, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T13:55:20.977' AS DateTime), CAST(N'2021-02-17T13:55:24.897' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (245, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:01:50.363' AS DateTime), CAST(N'2021-02-18T14:02:03.767' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (246, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:02:12.043' AS DateTime), CAST(N'2021-02-18T14:02:17.327' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (250, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:25:55.260' AS DateTime), CAST(N'2021-02-18T14:26:55.260' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (251, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:27:09.897' AS DateTime), CAST(N'2021-02-18T14:27:12.613' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (252, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:29:29.570' AS DateTime), CAST(N'2021-02-18T14:30:30.047' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (255, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:48:45.500' AS DateTime), CAST(N'2021-02-18T14:49:17.203' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (256, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:48:50.507' AS DateTime), CAST(N'2021-02-18T14:48:54.590' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (257, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:49:33.347' AS DateTime), CAST(N'2021-02-18T14:53:48.417' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (258, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:49:40.110' AS DateTime), CAST(N'2021-02-18T14:50:40.110' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (259, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:50:53.017' AS DateTime), CAST(N'2021-02-18T14:51:53.017' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (263, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:53:18.617' AS DateTime), CAST(N'2021-02-18T14:54:18.617' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (264, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:54:20.243' AS DateTime), CAST(N'2021-02-18T14:57:02.380' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (265, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T14:57:47.537' AS DateTime), CAST(N'2021-02-18T14:57:51.153' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (267, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:11:54.553' AS DateTime), CAST(N'2021-02-18T15:16:54.553' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (268, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:11:58.657' AS DateTime), CAST(N'2021-02-18T15:12:36.217' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (269, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:13:19.143' AS DateTime), CAST(N'2021-02-18T15:14:19.530' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (270, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:15:58.950' AS DateTime), CAST(N'2021-02-18T15:16:59.547' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (274, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:30:22.043' AS DateTime), CAST(N'2021-02-18T15:30:25.533' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (281, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T17:25:00.300' AS DateTime), CAST(N'2021-02-18T17:25:14.297' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (282, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T17:25:31.463' AS DateTime), CAST(N'2021-02-18T17:25:36.993' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (161, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:30:14.807' AS DateTime), CAST(N'2021-02-16T23:20:14.807' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (162, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:31:13.307' AS DateTime), CAST(N'2021-02-16T23:21:13.307' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (163, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:32:09.947' AS DateTime), CAST(N'2021-02-16T23:22:09.947' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (168, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:38:59.647' AS DateTime), CAST(N'2021-02-16T23:28:59.647' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (182, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:02:52.073' AS DateTime), CAST(N'2021-02-17T00:52:52.073' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (183, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:03:07.790' AS DateTime), CAST(N'2021-02-17T00:53:07.790' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (184, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:03:09.177' AS DateTime), CAST(N'2021-02-17T00:53:09.177' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (185, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:03:36.630' AS DateTime), CAST(N'2021-02-17T00:53:36.630' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (186, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:03:40.010' AS DateTime), CAST(N'2021-02-17T00:53:40.010' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (199, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:41:16.897' AS DateTime), CAST(N'2021-02-17T01:31:16.897' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (200, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:41:27.230' AS DateTime), CAST(N'2021-02-17T01:31:27.230' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (201, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:41:30.827' AS DateTime), CAST(N'2021-02-17T01:31:30.827' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (202, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:41:40.457' AS DateTime), CAST(N'2021-02-17T01:31:40.457' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (283, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T17:27:02.447' AS DateTime), CAST(N'2021-02-18T17:27:13.207' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (285, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T17:28:16.903' AS DateTime), CAST(N'2021-02-18T17:28:24.340' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (286, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T19:32:05.150' AS DateTime), CAST(N'2021-02-18T19:32:46.727' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (287, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T23:12:38.927' AS DateTime), CAST(N'2021-02-18T23:17:38.927' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (288, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T23:18:46.397' AS DateTime), CAST(N'2021-02-18T23:18:55.477' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (295, 7, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-22T11:42:39.663' AS DateTime), CAST(N'2021-02-22T11:42:51.777' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (296, 7, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-23T11:35:24.737' AS DateTime), CAST(N'2021-02-23T11:35:50.337' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (297, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T08:58:01.363' AS DateTime), CAST(N'2021-02-25T08:58:11.227' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (300, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T09:05:34.133' AS DateTime), CAST(N'2021-02-25T09:05:48.243' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (171, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:48:33.013' AS DateTime), CAST(N'2021-02-16T23:38:33.013' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (175, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-16T22:58:26.247' AS DateTime), CAST(N'2021-02-16T23:48:26.247' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (194, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:17:20.437' AS DateTime), CAST(N'2021-02-17T01:07:20.437' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (284, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T17:27:46.173' AS DateTime), CAST(N'2021-02-18T17:27:54.570' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (291, 7, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-18T23:54:38.973' AS DateTime), CAST(N'2021-02-18T23:59:38.973' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (298, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T09:04:11.640' AS DateTime), CAST(N'2021-02-25T09:04:21.453' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (299, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T09:04:49.873' AS DateTime), CAST(N'2021-02-25T09:05:11.930' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (301, 8, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T23:56:09.273' AS DateTime), CAST(N'2021-02-25T23:56:16.337' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (302, 8, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-25T23:56:36.263' AS DateTime), CAST(N'2021-02-25T23:56:43.540' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (198, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:34:07.387' AS DateTime), CAST(N'2021-02-17T01:24:07.387' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (260, 7, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-18T14:51:43.647' AS DateTime), CAST(N'2021-02-18T14:56:43.647' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (261, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-18T14:51:49.257' AS DateTime), CAST(N'2021-02-18T14:52:08.713' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (203, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:43:47.203' AS DateTime), CAST(N'2021-02-17T01:33:47.203' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (204, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:43:57.833' AS DateTime), CAST(N'2021-02-17T01:33:57.833' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (205, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:44:02.730' AS DateTime), CAST(N'2021-02-17T01:34:02.730' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (206, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T00:44:23.880' AS DateTime), CAST(N'2021-02-17T01:34:23.880' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (272, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:18:29.677' AS DateTime), CAST(N'2021-02-18T15:19:02.390' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (292, 7, N'bacnvse141018@fpt.edu.vn', CAST(N'2021-02-18T23:57:16.237' AS DateTime), CAST(N'2021-02-19T00:02:16.237' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (225, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-17T10:09:24.177' AS DateTime), CAST(N'2021-02-17T10:59:24.177' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (253, 7, N'bacnvse141019@fpt.edu.vn', CAST(N'2021-02-18T14:44:42.937' AS DateTime), CAST(N'2021-02-18T14:49:42.937' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (254, 6, N'bacnvse141019@fpt.edu.vn', CAST(N'2021-02-18T14:44:47.240' AS DateTime), CAST(N'2021-02-18T14:45:47.493' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (273, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:28:15.123' AS DateTime), CAST(N'2021-02-18T15:28:36.070' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (275, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:31:25.350' AS DateTime), CAST(N'2021-02-18T15:31:29.007' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (276, 7, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:38:11.653' AS DateTime), CAST(N'2021-02-18T15:38:43.827' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (277, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:38:57.833' AS DateTime), CAST(N'2021-02-18T15:39:03.693' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (278, 6, N'anhmeohoang789@gmail.com', CAST(N'2021-02-18T15:39:17.887' AS DateTime), CAST(N'2021-02-18T15:39:24.570' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (293, 7, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-19T00:00:09.170' AS DateTime), CAST(N'2021-02-19T00:05:09.170' AS DateTime))
+GO
+INSERT [dbo].[TakenSubject] ([id], [idSubject], [idUser], [startTime], [endTime]) VALUES (294, 6, N'bacnvse141020@fpt.edu.vn', CAST(N'2021-02-19T00:00:20.640' AS DateTime), CAST(N'2021-02-19T00:00:26.120' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[TakenSubject] OFF
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (3, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (3, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (3, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (4, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (4, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (4, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (5, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (5, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (5, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (6, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (6, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (6, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (8, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (8, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (8, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (9, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (9, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (9, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (10, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (10, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (10, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (11, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (11, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (11, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (12, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (12, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (12, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (14, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (14, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (14, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (15, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (15, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (15, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (16, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (16, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (16, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (17, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (17, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (17, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (18, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (18, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (18, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (19, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (19, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (19, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (20, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (20, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (20, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (21, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (21, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (21, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (22, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (22, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (22, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (24, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (24, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (24, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (25, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (25, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (25, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (26, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (26, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (26, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (27, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (27, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (27, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (28, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (28, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (28, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (29, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (29, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (29, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (30, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (30, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (30, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (31, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (31, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (31, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (32, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (32, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (32, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (33, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (33, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (33, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (34, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (34, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (34, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (35, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (35, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (35, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (36, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (36, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (36, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (37, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (37, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (37, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (38, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (38, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (38, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (39, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (39, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (39, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (40, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (40, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (40, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (41, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (41, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (41, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (42, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (42, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (42, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (43, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (43, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (43, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (44, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (44, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (44, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (45, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (45, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (45, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (46, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (46, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (46, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (47, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (47, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (47, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (48, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (48, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (48, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (49, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (49, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (49, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (50, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (50, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (50, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (51, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (51, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (51, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (52, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (52, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (52, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (53, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (53, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (53, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (54, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (54, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (54, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (55, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (55, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (55, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (56, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (56, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (56, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (57, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (57, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (57, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (58, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (58, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (58, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (59, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (59, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (59, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (60, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (60, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (60, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (61, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (61, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (61, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (62, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (62, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (62, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (63, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (63, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (63, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (64, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (64, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (64, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (65, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (65, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (65, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (66, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (66, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (66, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (67, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (67, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (67, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (68, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (68, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (68, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (69, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (69, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (69, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (70, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (70, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (70, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (71, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (71, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (71, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (72, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (72, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (72, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (73, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (73, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (73, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (77, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (77, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (77, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (79, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (79, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (79, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (121, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (121, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (121, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (124, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (124, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (124, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (125, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (125, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (125, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (126, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (126, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (126, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (127, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (127, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (127, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (128, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (128, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (128, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (129, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (129, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (129, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (131, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (131, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (131, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (133, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (133, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (133, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (135, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (135, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (135, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (136, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (136, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (136, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (138, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (138, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (138, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (139, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (139, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (139, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (140, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (140, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (140, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (141, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (141, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (141, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (143, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (143, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (143, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (144, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (144, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (144, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (145, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (145, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (145, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (146, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (146, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (146, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (147, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (147, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (147, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (148, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (148, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (148, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (150, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (150, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (150, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (151, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (151, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (151, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (152, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (152, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (152, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (153, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (154, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (155, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (156, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (157, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (158, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (159, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (160, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (161, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (162, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (163, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (165, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (166, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (167, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (168, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (169, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (170, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (171, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (172, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (173, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (174, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (175, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (178, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (179, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (180, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (182, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (183, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (184, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (185, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (186, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (187, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (188, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (189, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (190, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (191, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (192, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (193, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (194, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (195, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (196, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (198, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (199, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (200, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (201, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (202, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (203, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (203, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (203, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (204, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (204, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (204, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (205, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (205, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (205, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (206, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (206, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (206, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (207, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (207, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (207, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (208, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (208, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (208, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (209, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (209, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (209, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (210, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (210, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (210, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (211, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (211, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (211, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (212, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (212, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (212, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (213, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (213, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (213, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (214, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (214, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (214, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (215, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (215, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (215, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (216, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (216, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (216, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (217, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (217, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (217, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (218, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (218, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (218, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (219, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (219, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (219, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (220, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (220, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (220, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (221, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (221, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (221, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (222, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (222, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (222, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (223, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (223, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (223, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (225, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (225, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (225, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (226, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (226, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (226, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (227, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (227, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (227, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (228, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (228, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (229, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (229, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (230, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (230, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (231, 6)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (231, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (232, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (232, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (233, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (233, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (234, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (234, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (235, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (235, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (236, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (236, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (237, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (237, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (238, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (238, 20)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (239, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (239, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (245, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (245, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (246, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (246, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (247, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (247, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (248, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (248, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (250, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (251, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (252, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (253, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (253, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (253, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (253, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (253, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (254, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (255, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (255, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (255, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (255, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (255, 19)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (256, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (257, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (257, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (257, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (257, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (257, 20)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (258, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (259, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (260, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (260, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (260, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (260, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (260, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (261, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (263, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (264, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (264, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (264, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (264, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (264, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (265, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (267, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (267, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (267, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (267, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (267, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (268, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (269, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (270, 20)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (272, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (272, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (272, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (272, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (272, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (273, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (273, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (273, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (273, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (273, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (274, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (274, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (274, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (274, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (274, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (275, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (275, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (275, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (275, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (275, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (276, 9)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (276, 13)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (276, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (276, 16)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (276, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (277, 20)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (278, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (281, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (282, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (283, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (283, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (283, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (284, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (284, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (284, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (285, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (285, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (285, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (286, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (286, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (286, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (287, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (287, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (287, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (288, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (288, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (288, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (291, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (291, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (291, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (292, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (292, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (292, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (293, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (293, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (293, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (294, 10)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (295, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (295, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (295, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (296, 14)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (296, 15)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (296, 17)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (297, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (298, 11)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (299, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (300, 12)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (301, 22)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (301, 23)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (302, 21)
+GO
+INSERT [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion]) VALUES (302, 22)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'bacnvse141019@fpt.edu.vn', N'bac', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 2, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'cuocsonglala@gmail.com', N'Nguyen Van Bac', N'26813cdbea8c71f5bbb01ee981238f086c4983e2b4b0e8a614809687cb1cf0b2', 1, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'bacnvse@fpt.edu.vn', N'Nguyen Van Bac', N'26813cdbea8c71f5bbb01ee981238f086c4983e2b4b0e8a614809687cb1cf0b2', 1, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'anhgatayvn@gmail.com', N'Nhat Nhan Chi Ha', N'26813cdbea8c71f5bbb01ee981238f086c4983e2b4b0e8a614809687cb1cf0b2', 1, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'bacnvse141020@fpt.edu.vn', N'bac', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'anhmeohoang789@gmail.com', N'Nguyen Van Bac', N'26813cdbea8c71f5bbb01ee981238f086c4983e2b4b0e8a614809687cb1cf0b2', 2, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'bacnvse141018@fpt.edu.vn', N'bac', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'vsavas@gmail.com', N'vds', N'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 2, 1)
+GO
+INSERT [dbo].[User] ([email], [name], [password], [roleId], [status]) VALUES (N'codercualaotran@gmail.com', N'Nguyen Van Bac', N'3b446055b7a3ccdf68e0313c97dd3c2494a8a234178561d5ee4641245f9f2b98', 1, 1)
+GO
+/****** Object:  Index [AnswerDetail_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[AnswerDetail] ADD  CONSTRAINT [AnswerDetail_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[idTakenSubject] ASC,
+	[idQuestion] ASC,
+	[idOption] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [Option_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[Option] ADD  CONSTRAINT [Option_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [Question_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[Question] ADD  CONSTRAINT [Question_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [Role_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[Role] ADD  CONSTRAINT [Role_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [Subject_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[Subject] ADD  CONSTRAINT [Subject_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [TakenSubject_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[TakenSubject] ADD  CONSTRAINT [TakenSubject_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [TakenSubjectDetail_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[TakenSubjectDetail] ADD  CONSTRAINT [TakenSubjectDetail_pk] UNIQUE NONCLUSTERED 
+(
+	[idTakenSubject] ASC,
+	[idQuestion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [Student_pk]    Script Date: 2/26/2021 12:03:46 AM ******/
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [Student_pk] PRIMARY KEY NONCLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Subject] ADD  DEFAULT ((1)) FOR [status]
+GO
+ALTER TABLE [dbo].[User] ADD  DEFAULT ((1)) FOR [roleId]
+GO
+ALTER TABLE [dbo].[User] ADD  DEFAULT ((1)) FOR [status]
+GO
+ALTER TABLE [dbo].[AnswerDetail]  WITH CHECK ADD  CONSTRAINT [AnswerDetail_Option_id_fk] FOREIGN KEY([idOption])
+REFERENCES [dbo].[Option] ([id])
+GO
+ALTER TABLE [dbo].[AnswerDetail] CHECK CONSTRAINT [AnswerDetail_Option_id_fk]
+GO
+ALTER TABLE [dbo].[AnswerDetail]  WITH CHECK ADD  CONSTRAINT [AnswerDetail_TakenSubjectDetail_idTakenSubject_idQuestion_fk] FOREIGN KEY([idTakenSubject], [idQuestion])
+REFERENCES [dbo].[TakenSubjectDetail] ([idTakenSubject], [idQuestion])
+GO
+ALTER TABLE [dbo].[AnswerDetail] CHECK CONSTRAINT [AnswerDetail_TakenSubjectDetail_idTakenSubject_idQuestion_fk]
+GO
+ALTER TABLE [dbo].[Option]  WITH CHECK ADD  CONSTRAINT [Option_Question_id_fk] FOREIGN KEY([idQuestion])
+REFERENCES [dbo].[Question] ([id])
+GO
+ALTER TABLE [dbo].[Option] CHECK CONSTRAINT [Option_Question_id_fk]
+GO
+ALTER TABLE [dbo].[Question]  WITH CHECK ADD  CONSTRAINT [Question_Subject_id_fk] FOREIGN KEY([idSubject])
+REFERENCES [dbo].[Subject] ([id])
+GO
+ALTER TABLE [dbo].[Question] CHECK CONSTRAINT [Question_Subject_id_fk]
+GO
+ALTER TABLE [dbo].[Subject]  WITH CHECK ADD  CONSTRAINT [Subject_User_email_fk] FOREIGN KEY([idUser])
+REFERENCES [dbo].[User] ([email])
+GO
+ALTER TABLE [dbo].[Subject] CHECK CONSTRAINT [Subject_User_email_fk]
+GO
+ALTER TABLE [dbo].[TakenSubject]  WITH CHECK ADD  CONSTRAINT [TakenSubject_Subject_id_fk] FOREIGN KEY([idSubject])
+REFERENCES [dbo].[Subject] ([id])
+GO
+ALTER TABLE [dbo].[TakenSubject] CHECK CONSTRAINT [TakenSubject_Subject_id_fk]
+GO
+ALTER TABLE [dbo].[TakenSubject]  WITH CHECK ADD  CONSTRAINT [TakenSubject_User_email_fk] FOREIGN KEY([idUser])
+REFERENCES [dbo].[User] ([email])
+GO
+ALTER TABLE [dbo].[TakenSubject] CHECK CONSTRAINT [TakenSubject_User_email_fk]
+GO
+ALTER TABLE [dbo].[TakenSubjectDetail]  WITH CHECK ADD  CONSTRAINT [TakenQuizDetail_TakenSubject_id_fk] FOREIGN KEY([idTakenSubject])
+REFERENCES [dbo].[TakenSubject] ([id])
+GO
+ALTER TABLE [dbo].[TakenSubjectDetail] CHECK CONSTRAINT [TakenQuizDetail_TakenSubject_id_fk]
+GO
+ALTER TABLE [dbo].[TakenSubjectDetail]  WITH CHECK ADD  CONSTRAINT [TakenSubjectDetail_Question_id_fk] FOREIGN KEY([idQuestion])
+REFERENCES [dbo].[Question] ([id])
+GO
+ALTER TABLE [dbo].[TakenSubjectDetail] CHECK CONSTRAINT [TakenSubjectDetail_Question_id_fk]
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [User_Role_id_fk] FOREIGN KEY([roleId])
+REFERENCES [dbo].[Role] ([id])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [User_Role_id_fk]
+GO

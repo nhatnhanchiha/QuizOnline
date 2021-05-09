@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.User">
+        <!--@mbg.generated-->
+        <!--@Table [User]-->
+        <id column="email" property="email"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="roleId" property="roleId"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [email], [name], [password], [roleId], [status]
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from [User]
+        where [email] = #{email}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete
+        from [User]
+        where [email] = #{email}
+    </delete>
+    <insert id="insert" parameterType="com.bac.quizonline.model.entity.User">
+        <!--@mbg.generated-->
+        insert into [User] ([email], [name], [password], [roleId], [status])
+        values (#{email}, #{name}, #{password}, #{roleId}, #{status})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bac.quizonline.model.entity.User">
+        <!--@mbg.generated-->
+        insert into [User]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="email != null and email != ''">
+                [email],
+            </if>
+            <if test="name != null and name != ''">
+                [name],
+            </if>
+            <if test="password != null and password != ''">
+                [password],
+            </if>
+            <if test="roleId != null">
+                [roleId],
+            </if>
+            <if test="status != null">
+                [status],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="email != null and email != ''">
+                #{email},
+            </if>
+            <if test="name != null and name != ''">
+                #{name},
+            </if>
+            <if test="password != null and password != ''">
+                #{password},
+            </if>
+            <if test="roleId != null">
+                #{roleId},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.User">
+        <!--@mbg.generated-->
+        update [User]
+        <set>
+            <if test="name != null and name != ''">
+                [name] = #{name},
+            </if>
+            <if test="password != null and password != ''">
+                [password] = #{password},
+            </if>
+            <if test="roleId != null">
+                [roleId] = #{roleId},
+            </if>
+            <if test="status != null">
+                [status] = #{status},
+            </if>
+        </set>
+        where [email] = #{email}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.User">
+        <!--@mbg.generated-->
+        update [User]
+        set [name]     = #{name},
+            [password] = #{password},
+            [roleId]   = #{roleId},
+            [status]   = #{status}
+        where [email] = #{email}
+    </update>
+
+    <select id="login" resultMap="BaseResultMap">
+        select email, name, roleId, status
+        from [User]
+        where email = #{email}
+          and password = #{password};
+    </select>
+
+    <select id="checkExist" resultMap="BaseResultMap">
+        select top (1) email
+        from [User]
+        where email = #{email};
+    </select>
+</mapper>

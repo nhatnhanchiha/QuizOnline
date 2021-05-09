@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bac.quizonline.model.mapper.OptionMapper">
+    <resultMap id="BaseResultMap" type="com.bac.quizonline.model.entity.Option">
+        <!--@mbg.generated-->
+        <!--@Table [Option]-->
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="isRightAnswer" property="isRightAnswer"/>
+        <result column="idQuestion" property="idQuestion"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        [id], [content], [isRightAnswer], [idQuestion]
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from [Option]
+        where [id] = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from [Option]
+        where [id] = #{id}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Option"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Option] ([content], [isRightAnswer], [idQuestion])
+        values (#{content}, #{isRightAnswer}, #{idQuestion})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.bac.quizonline.model.entity.Option"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into [Option]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null and content != ''">
+                [content],
+            </if>
+            <if test="isRightAnswer != null">
+                [isRightAnswer],
+            </if>
+            <if test="idQuestion != null">
+                [idQuestion],
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null and content != ''">
+                #{content},
+            </if>
+            <if test="isRightAnswer != null">
+                #{isRightAnswer},
+            </if>
+            <if test="idQuestion != null">
+                #{idQuestion},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bac.quizonline.model.entity.Option">
+        <!--@mbg.generated-->
+        update [Option]
+        <set>
+            <if test="content != null and content != ''">
+                [content] = #{content},
+            </if>
+            <if test="isRightAnswer != null">
+                [isRightAnswer] = #{isRightAnswer},
+            </if>
+            <if test="idQuestion != null">
+                [idQuestion] = #{idQuestion},
+            </if>
+        </set>
+        where [id] = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bac.quizonline.model.entity.Option">
+        <!--@mbg.generated-->
+        update [Option]
+        set [content]       = #{content},
+            [isRightAnswer] = #{isRightAnswer},
+            [idQuestion]    = #{idQuestion}
+        where [id] = #{id}
+    </update>
+</mapper>
